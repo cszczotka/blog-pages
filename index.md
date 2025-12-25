@@ -1,5 +1,3 @@
-Here you can say lots of fun things about your site.
+IT-InnovationLab blog.
 
-Maybe say a some things about yourself.
-
-Or maybe what you plan to blog about.
+Technical blog about AI, Cloud, Data, DevOps and Software Engineering.
