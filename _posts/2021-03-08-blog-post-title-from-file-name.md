@@ -1,32 +1,67 @@
-## Blog Post Title From First Header
+## Azure SQL users namagment
 
-Due to a plugin called `jekyll-titles-from-headings` which is supported by GitHub Pages by default. The above header (in the markdown file) will be automatically used as the pages title.
-
-If the file does not start with a header, then the post title will be derived from the filename.
-
-This is a sample blog post. You can talk about all sorts of fun things here.
+Few tips how to manage users in Azure SQL
 
 ---
 
-### This is a header
+### Select db users
 
-#### Some T-SQL Code
 
-```tsql
-SELECT This, [Is], A, Code, Block -- Using SSMS style syntax highlighting
-    , REVERSE('abc')
-FROM dbo.SomeTable s
-    CROSS JOIN dbo.OtherTable o;
+```sql
+select name as username,
+       create_date,
+       modify_date,
+       type_desc as type,
+       authentication_type_desc as authentication_type
+from sys.database_principals
+where type not in ('A', 'G', 'R', 'X')
+      and sid is not null
+order by username;
 ```
 
-#### Some PowerShell Code
+### Show uses and roles
 
-```powershell
-Write-Host "This is a powershell Code block";
+```sql
+SELECT
+DP1.name AS DatabaseRoleName
+,ISNULL(DP2.name, 'No members') AS DatabaseUserName
+,DP2.principal_id
+,DP2.create_date
+FROM sys.database_role_members AS DRM
+RIGHT OUTER JOIN sys.database_principals AS DP1 ON DRM.role_principal_id = DP1.principal_id
+LEFT OUTER JOIN sys.database_principals AS DP2 ON DRM.member_principal_id = DP2.principal_id
+WHERE DP1.type = 'R'
+ORDER BY DP1.name, ISNULL(DP2.name, 'No members');
+```
 
-# There are many other languages you can use, but the style has to be loaded first
+### Register Manage Identity ( for example which repesent ADF ) as external user
 
-ForEach ($thing in $things) {
-    Write-Output "It highlights it using the GitHub style"
-}
+```sql
+CREATE USER [adf-mi] FROM EXTERNAL PROVIDER;
+ 
+EXEC sys.sp_addrolemember   
+    @rolename = N'db_datareader',  
+    @membername = [adf-mi]
+ 
+EXEC sys.sp_addrolemember   
+    @rolename = N'db_datawriter',  
+    @membername = [adf-mi]  
+ 
+  
+EXEC sys.sp_addrolemember   
+    @rolename = N'db_owner',  
+    @membername = [adf-mi]
+```
+
+### Create database user
+
+Run on master db
+
+```sql
+CREATE LOGIN sqluser-dbw-dev-westeu-001-read  WITH PASSWORD = 'xxx'
+```
+
+Run on your db
+```sql
+CREATE USER [sqluser-dbw-dev-westeu-001-read]  FOR LOGIN [sqluser-dbw_dev-westeu-001-read]  WITH DEFAULT_SCHEMA = dbo;
 ```
