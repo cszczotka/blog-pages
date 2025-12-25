@@ -110,3 +110,18 @@ mlflow.projects.run (
 )
 
 ```
+
+### Shift a model version within the MLflow Model Registry
+
+To shift model version 'model_version' within the MLflow Model Registry for the model 'model' from the Staging stage to the Production stage using the MLflow Client, archive any existing model versions already in the Production stage:
+
+```python
+from mlflow.tracking import MlflowClient
+
+client.transition_model_version_stage (
+name=model,
+version=model_version,
+stage=“Production“,
+archive_existing_versions=True )
+
+```
