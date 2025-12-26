@@ -132,3 +132,14 @@ archive_existing_versions=True )
 client = MlflowClient() 
 client.update_registered_model( name="model name", description="some description" )
 ```
+
+
+### Retrieve all active MLflow Model Registry Webhooks for a specific model
+
+```python
+from mlflow.utils.rest_utils import http_request
+
+endpoint = “/api/1.0/mlflow/registry-webhooks/list?model_name=model”
+response = http_request(host_creds=host_creds, endpoint=endpoint, method=”GET”)
+
+```
