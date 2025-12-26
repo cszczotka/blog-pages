@@ -125,3 +125,10 @@ stage=“Production“,
 archive_existing_versions=True )
 
 ```
+
+### Update registered model description
+
+```python
+client = MlflowClient() 
+client.update_registered_model( name="model name", description="some description" )
+```
