@@ -143,3 +143,17 @@ endpoint = “/api/1.0/mlflow/registry-webhooks/list?model_name=model”
 response = http_request(host_creds=host_creds, endpoint=endpoint, method=”GET”)
 
 ```
+
+
+### Run batch prediction
+
+Example how to deploy the model using a batch deployment approach and store the predictions in a Delta table for later use.
+
+```python
+from mlflow import pyfunc
+
+model = pyfunc.load_model(model_uri=“models:/my-model/1“)
+df = spark.read.format(“delta“).load(“/path/to/input_data“)
+predictions = model.predict(df)
+predictions.write.format(“delta“).save(“/path/to/output_data“)
+```
