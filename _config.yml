@@ -1,7 +1,8 @@
 title: "IT-Innovation lab blog"
 author: ""
 description: "Technology blog about AI, Cloud, Data, DevOps and Software Engineering." 
-
+baseurl: "/blog-pages"
+url: "https://cszczotka.github.io"
 # Email / Social media user names used by the minima theme:
 # All of these are optional and can be removed or commented out
 email: "example@mail.com"
