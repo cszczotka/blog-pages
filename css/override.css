@@ -1,6 +1,66 @@
+:root {
+  --bg-color: #050b18;
+  --surface-color: #0a1224;
+  --primary-color: #3b82f6;
+  --secondary-color: #2dd4bf;
+  --accent-color: #6366f1;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --glass-bg: rgba(10, 18, 36, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  background-color: var(--bg-color);
+  background-image: url('/assets/hero_bg.png');
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+  color: var(--text-primary);
+  font-family: var(--font-main);
+}
+
+.site-header, .site-footer {
+  background-color: var(--glass-bg) !important;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.page-content {
+  background: transparent;
+}
+
+.wrapper {
+  max-width: 1000px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+h1, h2, h3, h4, .site-title {
+  color: var(--text-primary) !important;
+  font-weight: 700;
+}
+
+.post-link, .site-title, a {
+  color: var(--primary-color) !important;
+}
+
+.post-meta {
+  color: var(--text-secondary);
+}
+
 hr {
   margin-top: 30px;
   margin-bottom: 20px;
+  border: 0;
+  border-top: 1px solid var(--glass-border);
 }
 
 /* Post navigation links */
@@ -17,7 +77,7 @@ hr {
   padding: 0 2.2em;
   width: 50%;
   position: relative;
-  color: inherit !important;
+  color: var(--primary-color) !important;
 }
 
 .post_navi .nav_prev {
