@@ -19,17 +19,18 @@ linkedin_username: "linkedinuser"
 #########################################################################################
 ######### Nothing below needs to be changed (unless you know what you're doing) #########
 #########################################################################################
-theme: "minima"
+#theme: "minima"
 
 rss: rss
 
 kramdown:
   syntax_highlighter_opts:
     disable: true
-    
+remote_theme: pages-themes/merlot@v0.2.0    
 plugins:
   - jekyll-feed
   - jekyll-sitemap
+  - jekyll-remote-theme
 
 titles_from_headings:
   strip_title: true
