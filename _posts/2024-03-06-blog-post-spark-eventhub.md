@@ -26,3 +26,5 @@ eventhub = spark\
   .option("eventhubs.startingPosition",  json.dumps(startingEventPosition))\
   .load()\
   .selectExpr("*","cast(body as string) payload")
+  
+```
