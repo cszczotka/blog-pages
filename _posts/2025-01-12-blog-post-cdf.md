@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Change Data Feed"
-date:   2022-10-10 12:00:00 +0100
+date:   2025-01-12 12:00:00 +0100
 categories: Databricks
 ---
 
